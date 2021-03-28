@@ -1,7 +1,8 @@
 import { Router } from 'express';
+import githubAuthenticate from './githubAuthenticate';
 
 const routes = new Router();
 
-routes.get('/test', (req, res) => res.json({ message: 'Sucesso!' }));
+routes.use('/github-auth', githubAuthenticate);
 
 export default routes;

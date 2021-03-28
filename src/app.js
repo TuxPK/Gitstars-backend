@@ -1,4 +1,6 @@
 import express from 'express';
+import { config } from 'dotenv';
+import routes from './routes';
 
 class App {
   constructor() {
@@ -10,12 +12,11 @@ class App {
 
   middlewares() {
     this.server.use(express.json());
+    config();
   }
 
   routes() {
-    this.server.get('/test', (req, res) => {
-      res.send('Sucesso!');
-    });
+    this.server.use(routes);
   }
 }
 
