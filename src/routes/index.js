@@ -1,8 +1,9 @@
 import { Router } from 'express';
-import githubAuthenticate from './githubAuthenticate';
+
+import session from './session';
 
 const routes = new Router();
 
-routes.use('/github-auth', githubAuthenticate);
+routes.use('/session', session);
 
 export default routes;
