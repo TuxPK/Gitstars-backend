@@ -59,6 +59,6 @@ async function createTag(requestData) {
       uuid, name, repository_id, user_id,
     });
   } catch (error) {
-    throw new Error(error);
+    throw new Error('Failed with an error in database request.');
   }
 }

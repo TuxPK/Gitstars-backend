@@ -3,11 +3,15 @@ import Tag from '../../models/Tag';
 export default async (req, res) => {
   const { user_id } = req;
 
-  const tags = await Tag.findAll({
-    where: {
-      user_id,
-    },
-  });
+  try {
+    const tags = await Tag.findAll({
+      where: {
+        user_id,
+      },
+    });
 
-  res.json(tags);
+    return res.json(tags);
+  } catch (error) {
+    throw new Error('Failed with an error in database request.');
+  }
 };
