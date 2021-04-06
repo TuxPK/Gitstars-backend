@@ -43,7 +43,11 @@ Back-end was made in node.js with express.
 
 ### You can add a Database using docker:
 ```bash
-  docker run --name database -e POSTGRES_PASSWORD=carbonara -p 5432:5432 -d postgres
+docker run --name database -e POSTGRES_PASSWORD=carbonara -p 5432:5432 -d postgres
+```
+### You need to run migrations to create the tables:
+```bash
+yarn sequelize db:migrate
 ```
 
 ### To load the project install the dependencies
