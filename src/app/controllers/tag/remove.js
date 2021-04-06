@@ -6,7 +6,7 @@ export default async (req, res) => {
   try {
     const response = await deleteUser(uuid);
 
-    return res.jsons(response);
+    return res.json(response);
   } catch (error) {
     return res.status(400).json(error.message);
   }
