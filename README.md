@@ -31,8 +31,8 @@ Back-end was made in node.js with express.
 ### Set the enviroment variables at .env
 ```bash
   # GITHUB API ENV
-  GITHUB_CLIENT_ID=*******************=,
-  GITHUB_CLIENT_SECRET=************************************=,
+  GITHUB_CLIENT_ID=*******************
+  GITHUB_CLIENT_SECRET=************************************
 
   # DATABASE ENV
   DATABASE_HOST=*************
