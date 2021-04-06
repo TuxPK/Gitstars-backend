@@ -41,6 +41,11 @@ Back-end was made in node.js with express.
   DATABASE_DATABASE=***************
 ```
 
+### You can add a Database using docker:
+```bash
+  docker run --name database -e POSTGRES_PASSWORD=carbonara -p 5432:5432 -d postgres
+```
+
 ### To load the project install the dependencies
 ```bash
 yarn 
