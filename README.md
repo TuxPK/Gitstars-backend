@@ -4,7 +4,7 @@ Application to view starred projects and be able to search for tags that can be 
 
 You can access the application page by [Gitstars](https://gitstar-five.vercel.app/)
 
-<img src="./screenshots/tag-search.gif" />
+<img src="screenshots/tag-search.jpeg" />
 
 ## Front-end
 
