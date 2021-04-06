@@ -1,5 +1,9 @@
 module.exports = {
   dialect: 'postgres',
+  ssl: true,
+  dialectOptions: {
+    ssl: true,
+  },
   host: process.env.DATABASE_HOST,
   username: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASS,
