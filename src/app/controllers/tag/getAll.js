@@ -22,6 +22,6 @@ async function getAll(user_id) {
 
     return tags;
   } catch (error) {
-    throw new Error('Failed with an error in database request.');
+    throw new Error(error);
   }
 }
