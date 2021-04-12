@@ -25,9 +25,11 @@ function extractRequestData(request) {
 }
 
 function analyseData(requestData) {
-  const { name, repository_id, user_id } = requestData;
+  const {
+    uuid, name, repository_id, user_id,
+  } = requestData;
 
-  if (!name || !repository_id || !user_id) {
+  if (!uuid || !name || !repository_id || !user_id) {
     throw new Error('Validation failed with some field not filled.');
   }
 }
@@ -52,11 +54,17 @@ async function updateTag(requestData) {
   } = requestData;
 
   try {
-    return await Tag.update({ name, repository_id, user_id }, {
+    await Tag.update({ name, repository_id, user_id }, {
       where: {
         uuid,
       },
+      returning: true,
+      plain: true,
     });
+
+    const tag = await Tag.findOne({ where: { uuid } });
+
+    return tag;
   } catch (error) {
     throw new Error('Failed with an error in database request.');
   }
