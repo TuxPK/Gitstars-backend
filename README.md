@@ -1,5 +1,6 @@
 # Gitstars
 
+
 Application to view starred projects and be able to search for tags that can be created and edited. All user starred repositories came from github API and only the tags will be saved in database with repository id to search and tag.
 
 You can access the application page by [Gitstars](https://gitstar-five.vercel.app/)
@@ -27,6 +28,15 @@ Back-end was made in node.js with express.
 * uuid
 * nodemon
 * sucrase
+* jest
+* sqlite3
+* supertest
+
+### You need to set a github oauth token
+
+For this, go to github [developer settings](https://github.com/settings/apps) and create a oauth app.
+
+<img src="screenshots/git-oauth.jpeg" />
 
 ### Set the enviroment variables at .env
 ```bash
@@ -35,10 +45,10 @@ Back-end was made in node.js with express.
   GITHUB_CLIENT_SECRET=************************************
 
   # DATABASE ENV
-  DATABASE_HOST=*************
-  DATABASE_USER=**********
-  DATABASE_PASS=*************************************
-  DATABASE_DATABASE=***************
+  DATABASE_HOST=localhost
+  DATABASE_USER=postgres
+  DATABASE_PASS=carbonara
+  DATABASE_DATABASE=gitstar
 ```
 
 ### You can add a Database using docker:
@@ -53,9 +63,16 @@ yarn
 npm install
 ```
 
-### You need to run migrations to create the tables:
+### You need to run migrations to create the tables
 ```bash
 yarn sequelize db:migrate
+```
+
+### To run test with jest:
+```
+yarn test
+  or
+npm test
 ```
 
 ### Start the server in development mode (hot-code reloading, error reporting, etc...)
