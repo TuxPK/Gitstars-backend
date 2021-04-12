@@ -13,7 +13,7 @@ export default async (req, res) => {
 
     return res.json(tag);
   } catch (error) {
-    return res.status(400).json(error.message);
+    return res.status(400).json({ error: error.message });
   }
 };
 

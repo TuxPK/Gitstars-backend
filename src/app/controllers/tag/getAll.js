@@ -8,7 +8,7 @@ export default async (req, res) => {
 
     return res.json(tags);
   } catch (error) {
-    return res.status(400).json(error.message);
+    return res.status(400).json({ error: error.message });
   }
 };
 
