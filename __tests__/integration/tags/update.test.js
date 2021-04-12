@@ -7,6 +7,7 @@ import auth from '../../util/auth';
 const { api_token, user_id, repository_id } = auth();
 
 const duplicatedError = 'This tag already exists.';
+const missingFieldsError = 'Validation failed with some field not filled.';
 
 describe('updateTags', () => {
   beforeAll(async () => {
@@ -49,6 +50,50 @@ describe('updateTags', () => {
     const response = await updateTags(tag);
 
     expect([response.status, response.body.error]).toEqual([400, duplicatedError]);
+  });
+
+  it('Should not be able to update tag with missing name', async () => {
+    const tag = {
+      name: 'Javascript',
+      repository_id,
+    };
+
+    const updateTag = {
+      uuid: '',
+      repository_id,
+      user_uuid: '',
+    };
+
+    const createdTag = await createTags(tag);
+
+    updateTag.uuid = createdTag.body.uuid;
+    updateTag.user_uuid = createdTag.body.user_uuid;
+
+    const response = await updateTags(updateTag);
+
+    expect([response.status, response.body.error]).toEqual([400, missingFieldsError]);
+  });
+
+  it('Should not be able to update tag with missing repository id', async () => {
+    const tag = {
+      name: 'React',
+      repository_id,
+    };
+
+    const updateTag = {
+      uuid: '',
+      name: 'React-Native',
+      user_uuid: '',
+    };
+
+    const createdTag = await createTags(tag);
+
+    updateTag.uuid = createdTag.body.uuid;
+    updateTag.user_uuid = createdTag.body.user_uuid;
+
+    const response = await updateTags(updateTag);
+
+    expect([response.status, response.body.error]).toEqual([400, missingFieldsError]);
   });
 });
 
