@@ -1,5 +1,7 @@
+require('../bootstrap');
+
 module.exports = {
-  dialect: 'postgres',
+  dialect: process.env.DATABASE_DIALECT || 'postgres',
   ssl: true,
   dialectOptions: {
     ssl: true,
@@ -9,6 +11,8 @@ module.exports = {
   password: process.env.DATABASE_PASS,
   database: process.env.DATABASE_DATABASE,
   port: 5432,
+  storage: './__tests__/database.sqlite',
+  logging: !(process.env.NODE_ENV === 'test'),
   define: {
     timestamps: false,
     underscored: true,
