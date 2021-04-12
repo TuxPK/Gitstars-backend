@@ -7,6 +7,7 @@ import auth from '../../util/auth';
 const { api_token, user_id, repository_id } = auth();
 
 const duplicatedError = 'This tag already exists.';
+const missingFieldsError = 'Validation failed with some field not filled.';
 
 describe('createTags', () => {
   beforeAll(async () => {
@@ -38,6 +39,26 @@ describe('createTags', () => {
     const response = await createTags(tag);
 
     expect([response.status, response.body.error]).toEqual([400, duplicatedError]);
+  });
+
+  it('Should not be able to register tag with missing name', async () => {
+    const tag = {
+      repository_id,
+    };
+
+    const response = await createTags(tag);
+
+    expect([response.status, response.body.error]).toEqual([400, missingFieldsError]);
+  });
+
+  it('Should not be able to register tag with missing repository id', async () => {
+    const tag = {
+      name: 'TDD',
+    };
+
+    const response = await createTags(tag);
+
+    expect([response.status, response.body.error]).toEqual([400, missingFieldsError]);
   });
 });
 
