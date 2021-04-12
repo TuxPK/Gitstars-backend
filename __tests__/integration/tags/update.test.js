@@ -4,7 +4,9 @@ import app from '../../../src/app';
 import truncate from '../../util/truncate';
 import auth from '../../util/auth';
 
-const { api_token, repository_id } = auth();
+const { api_token, user_id, repository_id } = auth();
+
+const duplicatedError = 'This tag already exists.';
 
 describe('updateTags', () => {
   beforeAll(async () => {
@@ -24,6 +26,29 @@ describe('updateTags', () => {
     const response = await updateTags(createdTag.body);
 
     expect(response.body).toEqual(createdTag.body);
+  });
+
+  it('Should not be able to update with duplicated tag', async () => {
+    const tag = {
+      uuid: null,
+      name: 'Ruby',
+      repository_id,
+      user_id,
+    };
+
+    const secondTag = {
+      name: 'PHP',
+      repository_id,
+    };
+
+    await createTags(tag);
+    const createdTag = await createTags(secondTag);
+
+    tag.uuid = createdTag.body.uuid;
+
+    const response = await updateTags(tag);
+
+    expect([response.status, response.body.error]).toEqual([400, duplicatedError]);
   });
 });
 
