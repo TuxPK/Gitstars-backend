@@ -14,13 +14,11 @@ export default async (req, res) => {
 
 async function getAll(user_id) {
   try {
-    const tags = await Tag.findAll({
+    return await Tag.findAll({
       where: {
         user_id,
       },
     });
-
-    return tags;
   } catch (error) {
     throw new Error(error);
   }

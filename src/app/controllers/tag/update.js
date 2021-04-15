@@ -54,17 +54,9 @@ async function updateTag(requestData) {
   } = requestData;
 
   try {
-    await Tag.update({ name, repository_id, user_id }, {
-      where: {
-        uuid,
-      },
-      returning: true,
-      plain: true,
-    });
-
-    const tag = await Tag.findOne({ where: { uuid } });
-
-    return tag;
+    return (await Tag.upsert({
+      uuid, name, repository_id, user_id,
+    }))[0].dataValues;
   } catch (error) {
     throw new Error('Failed with an error in database request.');
   }
