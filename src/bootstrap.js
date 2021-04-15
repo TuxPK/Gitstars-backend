@@ -9,5 +9,5 @@ function getPath() {
 
   if (env === 'test') return { path: '.env.test' };
   if (env === 'dev') return { path: '.env.example' };
-  return { path: '.env.example' };
+  return { path: '.env' };
 }
